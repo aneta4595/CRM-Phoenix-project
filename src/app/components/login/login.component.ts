@@ -14,6 +14,7 @@ export class LoginComponent {
   readonly loginForm: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required]),
+    rememberMe: new FormControl(true)
   });
 
   constructor(private _loginService: LoginService, private _router: Router, private _cd: ChangeDetectorRef) {
@@ -29,7 +30,8 @@ export class LoginComponent {
         password: loginForm.value.password,
       },
     },
-    
+    loginForm.value.rememberMe
+
     ).pipe(take(1)).subscribe({
       next: () => this._router.navigate(['/leads']),
       error: () => this.loginForm.setErrors({beValidation: true})
