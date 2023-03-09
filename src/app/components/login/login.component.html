@@ -69,15 +69,10 @@
                   <div class="auth-form-box">
                     <form
                   [formGroup]="loginForm"
-                  (ngSubmit)="onLoginFormSubmitted(loginForm)"
-                >
-                 
-               
-
+                  (ngSubmit)="onLoginFormSubmitted(loginForm)">
                     <div class="mb-3 text-start">
                       <label class="form-label" for="email"
-                        >Email address</label
-                      >
+                        >Email address</label>
 
                       <div class="form-icon-container">
                         <input
@@ -86,7 +81,9 @@
                           type="email"
                           formControlName="email"
                           placeholder="name@example.com"
-                        /><span
+                        />
+                        <div class="text-danger fs--1" *ngIf="loginForm.touched && loginForm.get('email')?.errors">Invalid email</div>
+                        <span
                           class="fas fa-user text-900 fs--1 form-icon"
                         ></span>
                       </div>
@@ -102,7 +99,9 @@
                           type="password"
                           formControlName="password"
                           placeholder="Password"
-                        /><span
+                        />
+                        <div class="text-danger fs--1" *ngIf="loginForm.touched && loginForm.get('password')?.hasError('required')">Password is required</div>
+                        <span
                           class="fas fa-key text-900 fs--1 form-icon"
                         ></span>
                       </div>
@@ -114,7 +113,7 @@
                             class="form-check-input"
                             id="basic-checkbox"
                             type="checkbox"
-                            checked="checked"
+                            formControlName="rememberMe"
                           />
                           <label
                             class="form-check-label mb-0"
@@ -131,7 +130,7 @@
                         >
                       </div>
                       <div>
-                        <mat-error style="color: red;" *ngIf="loginForm.hasError('beValidation')">Wrong password or email</mat-error>
+                        <mat-error class="text-danger" *ngIf="loginForm.hasError('beValidation')">Wrong password or email</mat-error>
                     </div>
                     </div>
                    
