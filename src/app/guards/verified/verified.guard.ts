@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { map, Observable } from 'rxjs';
-import { AuthService } from '../../services/auth.service';
+import { UserService } from 'src/app/services/user.service';
+
 
 @Injectable({ providedIn: 'root' })
 export class VerifiedGuard implements CanActivate {
-  constructor(private _authService: AuthService, private _router: Router) {
+  constructor(private _userService: UserService, private _router: Router) {
   }
 
   canActivate(
@@ -15,7 +16,7 @@ export class VerifiedGuard implements CanActivate {
 
     Observable<boolean | UrlTree>
 {
-    return this._authService.getUser().pipe(
+    return this._userService.getUser().pipe(
         map((response) => {
 
             return response.email_verified === true
