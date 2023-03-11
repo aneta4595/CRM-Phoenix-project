@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, pipe } from 'rxjs';
-import { map, share, shareReplay, tap } from 'rxjs/operators';
+import { map, shareReplay, take, tap } from 'rxjs/operators';
 import { HasDataModel } from '../models/has-data.model';
 import { LoginModel } from '../models/login.model';
 import { RegisterModel } from '../models/register.model';
-import { UserModel } from '../models/user.model';
-import { AuthMeResponse } from '../auth-me.response';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -33,7 +31,8 @@ export class AuthService {
       map((response) => ({
         accessToken: response.data.user.stsTokenManager.accessToken,
       })),
-      tap((token) => this.loginUser(token, false))
+      tap((token) => this.loginUser(token, false)),
+      
     )
   };
 
@@ -47,11 +46,7 @@ export class AuthService {
   }
 
 
-  getUser(): Observable<UserModel> {
-    return this._httpClient.get<AuthMeResponse<UserModel>>('https://us-central1-courses-auth.cloudfunctions.net/auth/me').pipe(
-      map((response) => response.data.user.context)
-    )
-  }
+
 }
 
 
