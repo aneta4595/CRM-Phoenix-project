@@ -4,7 +4,7 @@ import { map, Observable } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 
 @Injectable({ providedIn: 'root' })
-export class IsLoggedInGuard implements CanActivate {
+export class VerifiedGuard implements CanActivate {
   constructor(private _authService: AuthService, private _router: Router) {
   }
 
@@ -12,16 +12,16 @@ export class IsLoggedInGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ):
-    | boolean
-    | UrlTree
-    | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree> {
-   return this._authService.accessToken$.pipe(
-    map((isLoggedIn) => {
-        return isLoggedIn
-        ? true
-        : this._router.parseUrl('auth/login')
-    })
-   )
+
+    Observable<boolean | UrlTree>
+{
+    return this._authService.getUser().pipe(
+        map((response) => {
+
+            return response.email_verified === true
+            ? true
+            : this._router.parseUrl('/verify')
+        })
+    )
   }
 }
