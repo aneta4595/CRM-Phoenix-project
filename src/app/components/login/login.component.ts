@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewEncapsulatio
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { take } from 'rxjs';
-import { LoginService } from '../../services/login.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -17,16 +17,16 @@ export class LoginComponent {
     rememberMe: new FormControl(true)
   });
 
-  constructor(private _loginService: LoginService, private _router: Router, private _cd: ChangeDetectorRef) {
+  constructor(private _authService: AuthService, private _router: Router, private _cd: ChangeDetectorRef) {
   }
 
   onLoginFormSubmitted(loginForm: FormGroup): void {
     if(loginForm.invalid) {
       return
     }
-    this._loginService.login({
+    this._authService.login({
       data: {
-        email: loginForm.value.password,
+        email: loginForm.value.email,
         password: loginForm.value.password,
       },
     },
