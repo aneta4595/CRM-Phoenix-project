@@ -18,7 +18,7 @@ export class LeadsComponent {
 
   logout(): void {
     this._authService.logout();
-    this._router.navigate(['/auth/login'])
+    this._router.navigate(['/logged-out'])
   }
 
   hamburgerMenuUser() {
