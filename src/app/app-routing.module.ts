@@ -12,10 +12,13 @@ import { RegisterComponentModule } from './components/register/register.componen
 import { VerifyComponentModule } from './components/verify/verify.component-module';
 import { CompleteProfileComponentModule } from './components/complete-profile/complete-profile.component-module';
 import { LogoutComponentModule } from './components/logout/logout.component-module';
+import { IsLoggedInGuard } from './guards/is-logged-in/is-logged-in.guard';
+import { VerifiedGuard } from './guards/verified/verified.guard';
+import { HasBioGuard } from './guards/has-bio/has-bio.guard';
 
 const routes: Routes = [
   { path: 'auth/login', component: LoginComponent },
-  { path: 'leads', component: LeadsComponent },
+  { path: 'leads', component: LeadsComponent, canActivate: [IsLoggedInGuard, VerifiedGuard, HasBioGuard] },
   { path: 'auth/register', component: RegisterComponent },
   { path: 'verify', component: VerifyComponent },
   { path: 'complete-profile', component: CompleteProfileComponent },
