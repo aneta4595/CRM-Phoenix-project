@@ -10,12 +10,16 @@ import { RegisterComponentModule } from './components/register/register.componen
 import { VerifyComponentModule } from './components/verify/verify.component-module';
 import { VerifiedGuard } from './guards/verified/verified.guard';
 import { IsLoggedInGuard } from './guards/is-logged-in/is-logged-in.guard';
+import { CompleteProfileComponent } from './components/complete-profile/complete-profile.component';
+import { CompleteProfileComponentModule } from './components/complete-profile/complete-profile.component-module';
+import { HasBioGuard } from './guards/has-bio/has-bio.guard';
 
 const routes: Routes = [
   { path: 'auth/login', component: LoginComponent },
-  { path: 'leads', component: LeadsComponent, canActivate: [IsLoggedInGuard, VerifiedGuard] },
+  { path: 'leads', component: LeadsComponent, canActivate: [IsLoggedInGuard, VerifiedGuard, HasBioGuard] },
   { path: 'auth/register', component: RegisterComponent },
-  { path: 'verify', component: VerifyComponent }
+  { path: 'verify', component: VerifyComponent },
+  { path: 'complete-profile', component: CompleteProfileComponent}
 ];
 
 @NgModule({
@@ -24,7 +28,8 @@ const routes: Routes = [
     LoginComponentModule,
     LeadsComponentModule,
     RegisterComponentModule,
-    VerifyComponentModule
+    VerifyComponentModule,
+    CompleteProfileComponentModule
   ],
   exports: [RouterModule],
 })
