@@ -15,11 +15,12 @@ import { LogoutComponentModule } from './components/logout/logout.component-modu
 import { IsLoggedInGuard } from './guards/is-logged-in/is-logged-in.guard';
 import { VerifiedGuard } from './guards/verified/verified.guard';
 import { HasBioGuard } from './guards/has-bio/has-bio.guard';
+import { AutoLoginGuard } from './guards/auto-login/auto-login.guard';
 
 const routes: Routes = [
-  { path: 'auth/login', component: LoginComponent },
+  { path: 'auth/login', component: LoginComponent, canActivate: [AutoLoginGuard] },
   { path: 'leads', component: LeadsComponent, canActivate: [IsLoggedInGuard, VerifiedGuard, HasBioGuard] },
-  { path: 'auth/register', component: RegisterComponent },
+  { path: 'auth/register', component: RegisterComponent, canActivate: [AutoLoginGuard] },
   { path: 'verify', component: VerifyComponent },
   { path: 'complete-profile', component: CompleteProfileComponent },
   { path: 'logged-out', component: LogoutComponent }
