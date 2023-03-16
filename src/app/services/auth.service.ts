@@ -30,7 +30,6 @@ export class AuthService {
   }
 
   register(register: HasDataModel<RegisterModel>): Observable<any> {
-    console.log('register: ', register)
     return this._httpClient.post<any>('https://us-central1-courses-auth.cloudfunctions.net/auth/register2', register).pipe(
       map((response) => ({
         accessToken: response.data.user.stsTokenManager.accessToken,
