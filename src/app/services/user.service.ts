@@ -28,4 +28,5 @@ export class UserService {
   getUserBio(): Observable<void> {
     return this._httpClient.get<void>('https://us-central1-courses-auth.cloudfunctions.net/auth/my-bio');
   }
+
 }
