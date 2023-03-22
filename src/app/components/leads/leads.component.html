@@ -1,4 +1,4 @@
-<body>
+
 <main class="main" id="top">
   <div class="container-fluid px-0">
     <nav class="navbar navbar-top navbar-expand" id="navbarDefault">
@@ -17,11 +17,11 @@
               ><span class="toggle-line"></span
             ></span>
           </button>
-          <a class="navbar-brand me-1 me-sm-3" href="../../index.html">
+          <a class="navbar-brand me-1 me-sm-3" href="/index.html">
             <div class="d-flex align-items-center">
               <div class="d-flex align-items-center">
                 <img
-                  src="../../assets/img/icons/logo.png"
+                  src="/assets/img/icons/logo.png"
                   alt="phoenix"
                   width="27"
                 />
@@ -45,7 +45,7 @@
               <div class="avatar avatar-l">
                 <img
                   class="rounded-circle"
-                  src="../../assets/img/team/40x40/57.webp"
+                  src="/assets/img/team/40x40/57.webp"
                   alt=""
                 />
               </div>
@@ -62,7 +62,7 @@
                     <div class="avatar avatar-xl">
                       <img
                         class="rounded-circle"
-                        src="../../assets/img/team/72x72/57.webp"
+                        src="/assets/img/team/72x72/57.webp"
                         alt=""
                       />
                     </div>
@@ -104,37 +104,39 @@
             <div class="col-auto">
               <div class="d-md-flex justify-content-between">
                 <div *ngIf="isAdmin$ | async">
-                  <button class="btn btn-primary me-4">
-                    <span class="fas fa-plus me-2"></span>Create Lead
+                  <button class="btn btn-primary me-4" routerLink="/create-lead">
+                    
+                    <span class="fas fa-plus me-2"></span>
+                    Create Lead
+                  
                   </button>
                 </div>
               </div>
             </div>
 
             <div class="col-auto">
-              <div class="d-flex">
+              <div class="d-flex" >
                 <button
                   class="btn px-3 btn-phoenix-secondary"
+                 
                   (click)="showFilterModal()"
+                 
                   type="button"
                   data-bs-toggle="modal"
                   data-bs-target="#filterModal"
-                  data-boundary="window"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                  data-bs-reference="parent"
-                >
+                >Filter Modal
                   <span
                     class="fa-solid fa-filter text-primary"
                     data-fa-transform="down-3"
                   ></span>
+
                 </button>
 
-                <div
-                  class="modal fade"
-                  [ngClass]="{
-                    show: filterModal$ | async,
-                    showModal: filterModal$ | async
+                <div *ngIf="filterModal$ | async as filterModal"
+                  class="modal-open"
+                   [ngClass]="{
+                    'show-modal': filterModal,
+                    'hide-modal': !filterModal
                   }"
                   id="filterModal"
                   tabindex="-1"
@@ -421,12 +423,12 @@
           </div>
         </div>
       </footer>
-      <!-- <div class="fade" [ngClass]="{'modal-backdrop': filterModal$|async,show: filterModal$|async}"></div> -->
-    
+      
+       
+       
     </div>
-  
+
   </ng-container>
   </div>
 </main>
 
-</body>

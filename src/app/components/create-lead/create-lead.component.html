@@ -1,0 +1,350 @@
+<main class="main" id="top">
+  <div class="container-fluid px-0">
+    <nav class="navbar navbar-top navbar-expand" id="navbarDefault">
+      <div class="collapse navbar-collapse justify-content-between">
+        <div class="navbar-logo">
+          <button
+            class="btn navbar-toggler navbar-toggler-humburger-icon hover-bg-transparent"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarVerticalCollapse"
+            aria-controls="navbarVerticalCollapse"
+            aria-expanded="false"
+            aria-label="Toggle Navigation"
+          >
+            <span class="navbar-toggle-icon"
+              ><span class="toggle-line"></span
+            ></span>
+          </button>
+          <a class="navbar-brand me-1 me-sm-3" href="/index.html">
+            <div class="d-flex align-items-center">
+              <div class="d-flex align-items-center">
+                <img
+                  src="/assets/img/icons/logo.png"
+                  alt="phoenix"
+                  width="27"
+                />
+                <p class="logo-text ms-2 d-none d-sm-block">phoenix</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        <ul class="navbar-nav navbar-nav-icons flex-row">
+          <li class="nav-item dropdown">
+            <a
+              (click)="hamburgerMenuUser()"
+              class="nav-link lh-1 pe-0"
+              id="navbarDropdownUser"
+              role="button"
+              data-bs-toggle="dropdown"
+              data-bs-auto-close="outside"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <div class="avatar avatar-l">
+                <img
+                  class="rounded-circle"
+                  src="/assets/img/team/40x40/57.webp"
+                  alt=""
+                />
+              </div>
+            </a>
+            <div
+              class="dropdown-menu dropdown-menu-end navbar-dropdown-caret py-0 dropdown-profile shadow border border-300"
+              [ngClass]="{ show: hamburgerMenuUser$ | async }"
+              aria-labelledby="navbarDropdownUser"
+              data-bs-popper="static"
+            >
+              <div class="card position-relative border-0">
+                <div class="card-body p-0">
+                  <div class="text-center pt-4 pb-3">
+                    <div class="avatar avatar-xl">
+                      <img
+                        class="rounded-circle"
+                        src="/assets/img/team/72x72/57.webp"
+                        alt=""
+                      />
+                    </div>
+                    <h6 class="mt-2 text-black">Jerry Seinfield</h6>
+                  </div>
+                </div>
+
+                <div class="card-footer p-0 border-top">
+                  <div class="px-3 mt-3">
+                    <a
+                      class="btn btn-phoenix-secondary d-flex flex-center w-100"
+                      (click)="logout()"
+                    >
+                      <span class="me-2" data-feather="log-out"> </span>Sign
+                      out</a
+                    >
+                  </div>
+                  <div class="my-2 text-center fw-bold fs--2 text-600">
+                    <a class="text-600 me-1" href="#!">Privacy policy</a
+                    >&bull;<a class="text-600 mx-1" href="#!">Terms</a>&bull;<a
+                      class="text-600 ms-1"
+                      href="#!"
+                      >Cookies</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="content">
+      <div class="border-bottom mb-7 mx-n3 px-2 mx-lg-n6 px-lg-6">
+        <div class="row">
+          <div class="col-xl-12">
+            <div class="d-sm-flex justify-content-between">
+              <h2 class="mb-4">Create a new lead</h2>
+              <div class="d-flex mb-3">
+                <button class="btn btn-phoenix-primary me-2 px-6">
+                  Cancel
+                </button>
+                <button class="btn btn-primary">Create lead</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+
+          
+         <!-- <input
+            type="text"
+            formControlName="activities"
+            placeholder="Activities"
+          />
+          <input
+            type="text"
+            
+            placeholder="Hiring"
+          />
+          <input
+            type="text"
+            
+            placeholder="Notes"
+          /> -->
+
+
+
+          <div class="col-xl-12" >
+            <h4 class="mb-3">Lead Information</h4>
+            <form
+              [formGroup]="createLeadForm"
+              (ngSubmit)="onCreateLeadFormSubmitted(createLeadForm)"
+              class="row g-3 mb-9"
+            >
+              <div class="col-sm-6 col-md-4">
+                <div class="form-floating">
+                  <input
+                    class="form-control"
+                    id="floatingInputCompanyname"
+                    type="text"
+                    placeholder="Company name"
+                    formControlName="name"
+                  />
+                  <label for="floatingInputCompanyname">Company name</label>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-4">
+                <div class="form-floating">
+                  <input
+                    class="form-control"
+                    id="floatingInputWebsitelink"
+                    type="text"
+                    placeholder="Website link"
+                    formControlName="websiteLink"
+                  />
+                  <label for="floatingInputWebsitelink">Website link</label>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-4">
+                <div class="form-floating">
+                  <input
+                    class="form-control"
+                    id="floatingInputLinkedin"
+                    type="text"
+                    placeholder="Linkedin link"
+                    formControlName="linkedinLink"
+                  />
+                  <label for="floatingInputLinkedin">Linkedin link</label>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-4">
+                <div class="form-floating">
+                  <input
+                    class="form-control"
+                    id="floatingInputLocation"
+                    type="text"
+                    placeholder="Location"
+                    formControlName="location"
+                  />
+                  <label for="floatingInputLocation">Location</label>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-4">
+                <div class="form-floating">
+                  <input
+                    class="form-control"
+                    id="floatingInputIndustry"
+                    type="text"
+                    placeholder="Industry"
+                    formControlName="industry"
+                  />
+                  <label for="floatingInputIndustry">Industry</label>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-4">
+                <div class="form-floating">
+                  <input
+                    class="form-control"
+                    id="floatingInputRevenue"
+                    type="text"
+                    placeholder="revenue"
+                    formControlName="annualRevenue"
+                  />
+                  <label for="floatingInputRevenue">Annual revenue </label>
+                </div>
+              </div>
+              <h4 class="mt-6">Activities</h4>
+              <div class="col-12">
+                <div class="form-floating" formGroupName="activities">
+                  <div 
+                  *ngFor="let item of activitiesList$ | async"
+                  class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      [formControlName]="item.name"
+                    /><label [for]="item" class="form-check-label">
+                        {{item.name}}
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <h4 class="mt-6">Company Size</h4>
+              <div class="col-sm-6 col-md-4" >
+                <div class="form-floating" >
+                  <input class="form-control" id="floatingInputTotalSize" type="number" placeholder="Total size" formControlName="total"/>
+                  <label for="floatingInputTotalSize">Total size</label>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-4">
+                <div class="form-floating">
+                  <input class="form-control" id="floatingInputDevSize" type="number" placeholder="Dev Size" formControlName="dev"/>
+                  <label for="floatingInputDevSize">Dev Size</label>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-4">
+                <div class="form-floating">
+                  <input class="form-control" id="floatingInputFESize" type="number" placeholder="FE Size" formControlName="fe"/>
+                  <label for="floatingInputFESize">FE Size</label>
+                </div>
+              </div>
+
+              <h4 class="mt-6">Hiring Information</h4>
+              <div class="col-sm-6 col-md-4">
+                <div class="form-floating">
+                  <div class="form-check form-switch">
+                    <input
+                      class="form-check-input"
+                      id="flexSwitchCheckDefault"
+                      type="checkbox"
+                      formControlName="active"
+                    />
+                    <label class="form-check-label" for="flexSwitchCheckDefault" 
+                      >Is currently hiring?</label
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-4">
+                <div class="form-floating">
+                  <div class="form-check form-switch">
+                    <input
+                      class="form-check-input"
+                      id="flexSwitchCheckDefault2"
+                      type="checkbox"
+                      formControlName="junior"
+                    />
+                    <label
+                      class="form-check-label"
+                      for="flexSwitchCheckDefault2"
+                      >Is hiring junior?</label
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-4">
+                <div class="form-floating">
+                  <div class="form-check form-switch">
+                    <input
+                      class="form-check-input"
+                      id="flexSwitchCheckDefault3"
+                      type="checkbox"
+                      formControlName="talentProgram"
+                    />
+                    <label
+                      class="form-check-label"
+                      for="flexSwitchCheckDefault3"
+                      >Has Talent program?</label
+                    >
+                  </div>
+                </div>
+              </div>
+              <!-- <h4 class="mt-6">Status</h4>
+              <div class="col-12">
+                <select class="form-select form-select-lg mb-3">
+                  <option selected="">Preliminaries</option>
+                  <option value="1">Investigation</option>
+                  <option value="2">Demonstrating Capabilities</option>
+                  <option value="3">Obtaining Commitment</option>
+                </select>
+              </div> -->
+              <h4 class="mt-6">Notes</h4>
+              <div class="col-12">
+                <div class="form-floating">
+                  <textarea
+                    class="form-control"
+                    id="floatingProjectOverview"
+                    placeholder="Leave a comment here"
+                    formControlName="notes"
+                    style="height: 128px"
+                  ></textarea>
+                  <label for="floatingProjectOverview" >Lead description</label>
+                </div>
+              </div>
+              <div class="col-12 d-flex justify-content-end mt-6">
+                <button type="submit" value="submit" class="btn btn-primary">Create lead</button>
+              </div>
+            </form>
+          </div>
+      </div>
+      <footer class="footer position-absolute">
+        <div class="row g-0 justify-content-between align-items-center h-100">
+          <div class="col-12 col-sm-auto text-center">
+            <p class="mb-0 mt-2 mt-sm-0 text-900">
+              Thank you for creating with Phoenix<span
+                class="d-none d-sm-inline-block"
+              ></span
+              ><span class="d-none d-sm-inline-block mx-1">|</span
+              ><br class="d-sm-none" />2023 &copy;<a
+                class="mx-1"
+                href="https://themewagon.com"
+                >Themewagon</a
+              >
+            </p>
+          </div>
+          <div class="col-12 col-sm-auto text-center">
+            <p class="mb-0 text-600">v1.9.0</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+</main>

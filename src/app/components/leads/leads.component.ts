@@ -5,13 +5,12 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { BehaviorSubject, Observable, combineLatest, from, of } from 'rxjs';
-import { filter, map, shareReplay, startWith, switchMap, take, tap } from 'rxjs/operators';
+import {  map, shareReplay, startWith, switchMap, take, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { ActivityModel } from '../../models/activity.model';
 import { LeadSizeModel } from '../../models/lead-size.model';
 import { LeadQueryModel } from '../../query-models/lead.query-model';
 import { LeadModel } from '../../models/lead.model';
-import { FilterValueQueryModel } from '../../query-models/filter-value.query-model';
 import { AuthService } from '../../services/auth.service';
 import { LeadsService } from '../../services/leads.service';
 import { UserService } from '../../services/user.service';
@@ -23,15 +22,17 @@ import { UserService } from '../../services/user.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LeadsComponent {
+
   private _filterModalSubject: BehaviorSubject<boolean> =
-    new BehaviorSubject<boolean>(false);
-  public filterModal$: Observable<boolean> =
-    this._filterModalSubject.asObservable();
+  new BehaviorSubject<boolean>(false);
+public filterModal$: Observable<boolean> =
+  this._filterModalSubject.asObservable();
+  
 
   private _hamburgerMenuUserSubject: BehaviorSubject<boolean> =
     new BehaviorSubject<boolean>(false);
   public hamburgerMenuUser$: Observable<boolean> =
-    this._hamburgerMenuUserSubject.asObservable();
+    this._hamburgerMenuUserSubject.asObservable()
 
   readonly scopeForm: FormGroup = new FormGroup({});
   readonly sizeForm: FormGroup = new FormGroup({});
@@ -41,12 +42,7 @@ export class LeadsComponent {
     size: this.sizeForm,
   });
 
-  readonly activitiesList$: Observable<ActivityModel[]> = this._leadsService
-    .getAllActivities()
-    .pipe(take(1),
-      tap((data) => this.onActivityListAddControl(data)),
-      shareReplay(1)
-    );
+
 
   readonly leadSizeList$: Observable<LeadSizeModel[]> = of([
     { rangeId: '1', from: 0, to: 50 },
@@ -112,7 +108,13 @@ readonly leadList$: Observable<LeadQueryModel[]> = this.leadListFilter$.pipe(
   switchMap((leadList) => 
   this.activitiesList$.pipe(map((activityList) => this._mapToLeadQuery(leadList, activityList)))
   )
-)
+);
+readonly activitiesList$: Observable<ActivityModel[]> = this._leadsService
+.getAllActivities()
+.pipe(take(1),
+  tap((data) => this.onActivityListAddControl(data)),
+  shareReplay(1)
+);
 
 
   readonly leadsAndActivities$: Observable<LeadQueryModel[]> = combineLatest([
@@ -178,7 +180,6 @@ readonly leadList$: Observable<LeadQueryModel[]> = this.leadListFilter$.pipe(
     });
   }
   showFilterModal() {
-    console.log('show: ');
     this.filterModal$
       .pipe(
         take(1),
@@ -186,7 +187,6 @@ readonly leadList$: Observable<LeadQueryModel[]> = this.leadListFilter$.pipe(
       )
       .subscribe();
   }
-
   hideFilterModal() {
     this.filterModal$
       .pipe(
@@ -200,14 +200,17 @@ readonly leadList$: Observable<LeadQueryModel[]> = this.leadListFilter$.pipe(
     this.filterForm.reset();
   }
 
-  onLeadSizeListAddControls(leadSizeList: LeadSizeModel[]): void {
-    leadSizeList.forEach((leadSize) =>
-      this.sizeForm.addControl(leadSize.rangeId, new FormControl(false))
-    );
-  }
+
   onActivityListAddControl(activityList: ActivityModel[]): void {
     activityList.forEach((activity) =>
       this.scopeForm.addControl(activity.id, new FormControl(false))
+    );
+  }
+
+
+  onLeadSizeListAddControls(leadSizeList: LeadSizeModel[]): void {
+    leadSizeList.forEach((leadSize) =>
+      this.sizeForm.addControl(leadSize.rangeId, new FormControl(false))
     );
   }
 
